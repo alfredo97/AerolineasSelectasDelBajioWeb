@@ -1,0 +1,36 @@
+﻿@model AerolineasSelectasDelBajioWeb_Entities.SourceDestiny
+
+@{
+    ViewData["Title"] = "Crear";
+}
+
+<h1>Crear</h1>
+
+<h4>Origen-Destino</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SourceDestinyFrom" class="control-label"></label>
+                <select asp-for="SourceDestinyFrom" class ="form-control" asp-items="ViewBag.SourceDestinyFrom"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="SourceDestinyTo" class="control-label"></label>
+                <select asp-for="SourceDestinyTo" class ="form-control" asp-items="ViewBag.SourceDestinyTo"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Crear" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Volver a la lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

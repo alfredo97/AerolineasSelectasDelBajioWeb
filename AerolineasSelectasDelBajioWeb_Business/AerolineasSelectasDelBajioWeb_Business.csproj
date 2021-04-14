@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AerolineasSelectasDelBajioWeb_Data\AerolineasSelectasDelBajioWeb_Data.csproj" />
+    <ProjectReference Include="..\AerolineasSelectasDelBajioWeb_Entities\AerolineasSelectasDelBajioWeb_Entities.csproj" />
+  </ItemGroup>
+
+</Project>

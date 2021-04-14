@@ -1,0 +1,34 @@
+﻿@model IEnumerable<AerolineasSelectasDelBajioWeb_Entities.City>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Ciudades</h1>
+
+<p>
+    <a asp-action="Create">Crear nuevo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CityName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CityName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CityId">Editar</a> |
+                <a asp-action="Delete" asp-route-id="@item.CityId">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

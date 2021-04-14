@@ -1,0 +1,79 @@
+﻿@model IEnumerable<AerolineasSelectasDelBajioWeb_Entities.Ticket>
+
+@{
+  ViewData["Title"] = "Boletos";
+}
+
+<h1>Boletos disponibles</h1>
+
+<p>
+  <a asp-action="Create">Agregar boleto</a>
+</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>
+        @Html.DisplayNameFor(model => model.TicketId)
+      </th>
+      <th>
+        @Html.DisplayNameFor(model => model.TicketNPlace)
+      </th>
+      <th>
+        @Html.DisplayNameFor(model => model.TicketPrice)
+      </th>
+      <th>
+        @Html.DisplayNameFor(model => model.TicketDepartureTime)
+      </th>
+      <th>
+        @Html.DisplayNameFor(model => model.TicketAirplane)
+      </th>
+      <th>
+        @Html.DisplayNameFor(model => model.TicketSale)
+      </th>
+      <th>
+        Origen
+      </th>
+      <th>
+        Destino
+      </th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var item in Model)
+    {
+    <tr>
+      <td>
+        @Html.DisplayFor(modelItem => item.TicketId)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.TicketNPlace)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.TicketPrice)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.TicketDepartureTime)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.TicketAirplane.AirplaneName)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.TicketSale.SaleId)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.TicketSourceDestiny.SourceDestinyFromNavigation.CityName)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.TicketSourceDestiny.SourceDestinyToNavigation.CityName)
+      </td>
+      <td>
+        @if (item.TicketSale.SaleId == 1)
+        {<a asp-action="Edit" asp-route-id="@item.TicketId">Modificar</a>
+          <a asp-action="Delete" asp-route-id="@item.TicketId">Eliminar</a>
+        }
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>

@@ -1,0 +1,40 @@
+﻿@model IEnumerable<AerolineasSelectasDelBajioWeb_Entities.Airplane>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Aviones</h1>
+
+<p>
+    <a asp-action="Create">Crear nuevo</a>
+</p>
+<table class="table">
+    <thead>
+      <tr>
+        <th>
+          @Html.DisplayNameFor(model => model.AirplaneName)
+        </th>
+        <th>
+          @Html.DisplayNameFor(model => model.AirplaneNplaces)
+        </th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+      <tr>
+        <td>
+          @Html.DisplayFor(modelItem => item.AirplaneName)
+        </td>
+        <td>
+          @Html.DisplayFor(modelItem => item.AirplaneNplaces)
+        </td>
+        <td>
+          <a asp-action="Edit" asp-route-id="@item.AirplaneId">Editar</a> |
+          <a asp-action="Delete" asp-route-id="@item.AirplaneId">Eliminar</a>
+        </td>
+      </tr>
+}
+    </tbody>
+</table>

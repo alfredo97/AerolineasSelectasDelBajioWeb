@@ -14,7 +14,7 @@ namespace AerolineasSelectasDelBajioWeb_Entities
         [Display(Name = "Id")]
         public int TicketId { get; set; }
         
-        [Display(Name = "Cant. Asientos")]
+        [Display(Name = "# Asiento")]
         public int TicketNPlace { get; set; }
 
         [Display(Name = "Precio")]
@@ -38,6 +38,9 @@ namespace AerolineasSelectasDelBajioWeb_Entities
 
         [Display(Name = "Origen-Destino")]
         public virtual SourceDestiny TicketSourceDestiny { get; set; }
+
+        [NotMapped]
+        public bool InShopCart { get; set; }
 
 
     }

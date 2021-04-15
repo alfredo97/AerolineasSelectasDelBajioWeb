@@ -90,12 +90,12 @@ namespace AerolineasSelectasDelBajioWeb_UI.Areas.Identity.Pages.Account
                     //Agregar usuario a rol de usuario normal
                     
                     var userTemp = await _userManager.FindByNameAsync(Input.UserName);
-                    if (!await _roleManager.RoleExistsAsync("Admin")){
-                        await _roleManager.CreateAsync(new IdentityRole("Admin"));
+                    if (!await _roleManager.RoleExistsAsync("User")){
+                        await _roleManager.CreateAsync(new IdentityRole("User"));
                     }
-                    if (!await _userManager.IsInRoleAsync(userTemp, "Admin"))
+                    if (!await _userManager.IsInRoleAsync(userTemp, "User"))
                     {
-                        await _userManager.AddToRoleAsync(userTemp, "Admin");
+                        await _userManager.AddToRoleAsync(userTemp, "User");
                     }
 
 

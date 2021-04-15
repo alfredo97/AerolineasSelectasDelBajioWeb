@@ -6,6 +6,8 @@
   <title>Inicio</title>
   <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="~/css/site.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+
 </head>
 <body>
   <header>
@@ -33,14 +35,14 @@
               <li class="nav-item">
                 <a class="nav-link text-dark" asp-area="" asp-controller="Tickets" asp-action="Index">Boletos</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Sales" asp-action="Index">Ventas</a>
+              </li>
             }
             else if (User.IsInRole("User"))
             {
               <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="UserTickets" asp-action="Index">Comprar boletos</a>
               </li>
             }
 
@@ -63,6 +65,76 @@
   <script src="~/lib/jquery/dist/jquery.min.js"></script>
   <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="~/js/site.js" asp-append-version="true"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#myTable').DataTable({
+        language: {
+          "decimal": "",
+          "emptyTable": "No hay información",
+          "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+          "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+          "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+          "infoPostFix": "",
+          "thousands": ",",
+          "lengthMenu": "Mostrar _MENU_ Entradas",
+          "loadingRecords": "Cargando...",
+          "processing": "Procesando...",
+          "search": "Buscar:",
+          "zeroRecords": "Sin resultados encontrados",
+          "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+          }
+        }
+      });
+
+      $('#myTableSales tfoot th').each(function () {
+        var title = $(this).text();
+        $(this).html('<input type="text" placeholder="Buscar ' + title + '" />');
+      });
+
+      var table = $('#myTableSales').DataTable({
+        initComplete: function () {
+          // Apply the search
+          this.api().columns().every(function () {
+            var that = this;
+
+            $('input', this.footer()).on('keyup change clear', function () {
+              if (that.search() !== this.value) {
+                that
+                  .search(this.value)
+                  .draw();
+              }
+            });
+          });
+        },
+        language: {
+          "decimal": "",
+          "emptyTable": "No hay información",
+          "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+          "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+          "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+          "infoPostFix": "",
+          "thousands": ",",
+          "lengthMenu": "Mostrar _MENU_ Entradas",
+          "loadingRecords": "Cargando...",
+          "processing": "Procesando...",
+          "search": "Buscar:",
+          "zeroRecords": "Sin resultados encontrados",
+          "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+          }
+        }
+      });
+
+    });
+  </script>
   @RenderSection("Scripts", required: false)
 </body>
 </html>

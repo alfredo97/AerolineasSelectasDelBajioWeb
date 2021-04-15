@@ -1,0 +1,120 @@
+﻿@model AerolineasSelectasDelBajioWeb_UI.ViewModels.TicketViewModel
+
+@{
+  ViewData["Title"] = "Index";
+}
+
+<h1>Vuelos Disponibles</h1>
+
+
+
+<form asp-controller="UserTickets" asp-action="BuyTickets" enctype="multipart/form-data">
+  <p>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#SaleModal">Comprar</button>
+  </p>
+  <table id="myTable" class="table">
+    <thead>
+      <tr>
+        <th>
+          # Asiento
+        </th>
+        <th>
+          Precio
+        </th>
+        <th>
+          Hora Salida
+        </th>
+        <th>
+          Avión
+        </th>
+        <th>
+          Origen
+        </th>
+        <th>
+          Dstino
+        </th>
+        <th>Agregar a Carrito</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (int i = 0; i < Model.TicketList.Count(); i++)
+      {
+        <span style="display:none">@Html.EditorFor(modelItem => Model.TicketList[i].TicketId)</span>
+        <tr>
+          <td>
+            @Html.DisplayFor(modelItem => Model.TicketList[i].TicketNPlace)
+          </td>
+          <td>
+            @Html.DisplayFor(modelItem => Model.TicketList[i].TicketPrice)
+          </td>
+          <td>
+            @Html.DisplayFor(modelItem => Model.TicketList[i].TicketDepartureTime)
+          </td>
+          <td>
+            @Html.DisplayFor(modelItem => Model.TicketList[i].TicketAirplane.AirplaneName)
+          </td>
+          <td>
+            @Html.DisplayFor(modelItem => Model.TicketList[i].TicketSourceDestiny.SourceDestinyFromNavigation.CityName)
+          </td>
+          <td>
+            @Html.DisplayFor(modelItem => Model.TicketList[i].TicketSourceDestiny.SourceDestinyToNavigation.CityName)
+          </td>
+          <td>
+            @Html.EditorFor(modelItem => Model.TicketList[i].InShopCart)
+          </td>
+        </tr>
+
+      }
+
+    </tbody>
+
+  </table>
+  @*Modal*@
+  <div class="modal fade" id="SaleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Confirmar compra</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-3">
+              Nombre:
+            </div>
+            <div class="col-6">
+              @Html.TextBoxFor(item => item.Name, new { @class = "form-control form-control-sm" })
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-3">
+              Tarjeta de Crédito:
+            </div>
+            <div class="col-6">
+              @Html.TextBoxFor(item => item.CreditCard, new { @class = "form-control form-control-sm" })
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-3">
+              Tipo pasajero:
+            </div>
+            <div class="col-6">
+              <select name="PassengerType" class="form-control form-control-sm" >
+                <option value="Adulto">Adulto</option>
+                <option value="Niño">Niño</option>
+                <option value="Bebé">Bebé</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary">Comprar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+

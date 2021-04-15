@@ -1,0 +1,77 @@
+﻿@model IEnumerable<AerolineasSelectasDelBajioWeb_Entities.Sale>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    
+</p>
+<table class="table table-responsive" id="myTableSales">
+  <thead>
+    <tr>
+      <th>
+        @Html.DisplayNameFor(model => model.SaleDate)
+      </th>
+      <th>
+        @Html.DisplayNameFor(model => model.SaleTax)
+      </th>
+      <th>
+        @Html.DisplayNameFor(model => model.SaleSubtotal)
+      </th>
+      <th>
+        @Html.DisplayNameFor(model => model.SaleTotal)
+      </th>
+      <th>
+        @Html.DisplayNameFor(model => model.SaleCreditcard)
+      </th>
+      <th>
+        @Html.DisplayNameFor(model => model.SaleAspnetusers)
+      </th>
+      <th>
+        @Html.DisplayNameFor(model => model.SaleName)
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var item in Model)
+    {
+      <tr>
+        <td>
+          @Html.DisplayFor(modelItem => item.SaleDate)
+        </td>
+        <td>
+          @Html.DisplayFor(modelItem => item.SaleTax)
+        </td>
+        <td>
+          @Html.DisplayFor(modelItem => item.SaleSubtotal)
+        </td>
+        <td>
+          @Html.DisplayFor(modelItem => item.SaleTotal)
+        </td>
+        <td>
+          @Html.DisplayFor(modelItem => item.SaleCreditcard)
+        </td>
+        <td>
+          @Html.DisplayFor(modelItem => item.SaleAspnetusers.UserName)
+        </td>
+        <td>
+          @Html.DisplayFor(modelItem => item.SaleName)
+        </td>
+      </tr>
+    }
+  </tbody>
+  <tfoot>
+    <tr>
+      <th>Fecha</th>
+      <th>Impuesto</th>
+      <th>Subtotal</th>
+      <th>Total</th>
+      <th>Tarjeta de crédito</th>
+      <th>Usuario</th>
+      <th>Nombre</th>
+    </tr>
+  </tfoot>
+</table>

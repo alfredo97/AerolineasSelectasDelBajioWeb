@@ -61,8 +61,6 @@ namespace AerolineasSelectasDelBajioWeb_UI.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.AirplaneNplaces).HasColumnName("airplane_nplaces");
-
-                entity.HasAlternateKey(e => e.AirplaneName);
             });
 
             modelBuilder.Entity<AspNetRoleClaims>(entity =>
@@ -175,10 +173,8 @@ namespace AerolineasSelectasDelBajioWeb_UI.Models
 
                 entity.Property(e => e.CityName)
                     .HasColumnName("city_name")
-                    .HasMaxLength(1)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
-
-                entity.HasAlternateKey(e => e.CityName);
             });
 
             modelBuilder.Entity<Sale>(entity =>
@@ -192,6 +188,25 @@ namespace AerolineasSelectasDelBajioWeb_UI.Models
                     .HasColumnName("sale_aspnetusers_id")
                     .HasMaxLength(450);
 
+                entity.Property(e => e.SaleCreditcard)
+                    .HasColumnName("sale_creditcard")
+                    .HasMaxLength(20)
+                    .IsFixedLength();
+
+                entity.Property(e => e.SalePassengerType)
+                    .HasColumnName("sale_passenger_type")
+                    .HasMaxLength(10)
+                    .IsFixedLength();
+
+                entity.Property(e => e.SaleDate)
+                    .HasColumnName("sale_date")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.SaleName)
+                    .HasColumnName("sale_name")
+                    .HasMaxLength(50)
+                    .IsFixedLength();
+
                 entity.Property(e => e.SaleSubtotal)
                     .HasColumnName("sale_subtotal")
                     .HasColumnType("money");
@@ -199,7 +214,6 @@ namespace AerolineasSelectasDelBajioWeb_UI.Models
                 entity.Property(e => e.SaleTax)
                     .HasColumnName("sale_tax")
                     .HasColumnType("money");
-
 
                 entity.Property(e => e.SaleTotal)
                     .HasColumnName("sale_total")
@@ -274,9 +288,7 @@ namespace AerolineasSelectasDelBajioWeb_UI.Models
                 entity.HasOne(d => d.TicketSale)
                     .WithMany(p => p.Ticket)
                     .HasForeignKey(d => d.TicketSaleId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_TicketSale")
-                    .IsRequired(false);
+                    .HasConstraintName("FK_TicketSale");
 
                 entity.HasOne(d => d.TicketSourceDestiny)
                     .WithMany(p => p.Ticket)
